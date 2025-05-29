@@ -13,7 +13,8 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     const role = users[username].role;
     localStorage.setItem("userRole", role);
     localStorage.setItem("userName", username);
-    window.location.href = "admin.html";
+    window.location.href = "espace-admin.html"; // ou le nom que tu as choisi
+
   } else {
     document.getElementById("error").style.display = "block";
   }
