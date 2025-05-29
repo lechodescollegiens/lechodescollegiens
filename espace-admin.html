@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Espace Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="admin-panel">
+    <h2>🎛️ Tableau de bord admin</h2>
+    <p id="welcome"></p>
+
+    <section id="superadmin-tools" style="display: none;">
+      <h3>🛠️ Outils Super Admin</h3>
+      <ul>
+        <li>Gérer les comptes</li>
+        <li>Modifier les pages du site</li>
+        <li>Accès complet au contenu</li>
+      </ul>
+    </section>
+
+    <section id="admin-tools" style="display: none;">
+      <h3>📋 Outils Admin</h3>
+      <ul>
+        <li>Ajouter ou modifier un article</li>
+        <li>Uploader des fichiers (PDF, images)</li>
+        <li>Voir les statistiques</li>
+      </ul>
+    </section>
+
+    <button onclick="logout()">Se déconnecter</button>
+  </main>
+
+  <script>
+    const role = localStorage.getItem("userRole");
+    const username = localStorage.getItem("userName");
+
+    if (!role || !username) {
+      // Pas connecté → rediriger
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("welcome").textContent = `Bienvenue, ${username} (${role})`;
+
+      if (role === "superadmin") {
+        document.getElementById("superadmin-tools").style.display = "block";
+      }
+      if (role === "admin" || role === "superadmin") {
+        document.getElementById("admin-tools").style.display = "block";
+      }
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
